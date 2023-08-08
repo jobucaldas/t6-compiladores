@@ -55,7 +55,7 @@
             <configuration>
                 <archive>
                     <manifest>
-                        <mainClass>br.dc.compiladores.alguma.semantico.Principal</mainClass>
+                        <mainClass>br.dc.compiladores.linguagem.noita.Principal</mainClass>
                     </manifest>
                 </archive>
                 <descriptorRefs>
