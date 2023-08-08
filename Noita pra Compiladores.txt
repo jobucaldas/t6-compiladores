@@ -1,0 +1,45 @@
+
+##### ALGORITMO #####
+################################# ALGORITMO ################################
+
+spells
+	spell spellName
+		type spellType[TipoSpell]
+		mana manaCost[int]
+		"extras []"
+	end-spell
+end-spells
+;comentario
+wands
+	wand wandName
+		shuffle isShuffle[bool]
+		spells/cast spellsPorCast[int]
+		delay wandDelay[float] s
+		recharge wandRechargeTime[float] s
+		mana maxMana[int]
+		regen manaRegen[int]
+		capacity maxCapacity[int]
+		spread wandSpread[float] DEG
+		slots
+			spell1[string], spell2[string], ... , spelln[string]
+		end-slots
+	end-wand
+end-wands
+
+############################################################################
+
+
+
+extra tags for spells:
+	uses limitedUses[int]
+	damage spellDamage[int]
+	radius spellRadius[int]
+	spread spellSpread[float] DEG
+	speed spellSpeed[int]
+	lifetime spellLifetime[float] s
+	delay spellDelay[float] s
+	recharge spellRechargeTime[float] s
+	crit %spellCritChance[int]
+	
+
+
