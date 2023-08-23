@@ -27,10 +27,10 @@ Sendo a **[ENTRADA]** o endereço do programa a ser analisado e **[SAIDA]** o en
 Por exemplo, com o comando
 
 ```bash
-java -jar C:\Compiladores\T3\t3-compiladores\alguma-semantico\target\linguagem-noita-1.0-SNAPSHOT-jar-with-dependencies.jar C:\entrada\programa.txt C:\saida\saida.txt
+java -jar PATH-TO-REPO\alguma-semantico\target\linguagem-noita-1.0-SNAPSHOT-jar-with-dependencies.jar CAMINHO-ESCOLHIDO\entrada\programa.txt CAMINHO-ESCOLHIDO\saida.txt
 ```
 
-O compilador analisa a semântica do programa escrito no arquivo *programa.txt* localizado em *C:\entrada* e imprime o resultado da análise (erros semânticos, se existirem) no arquivo *saida.txt* localizado em *C:\saida*.
+O compilador analisa a semântica do programa escrito no arquivo *programa.txt* localizado no *CAMINHO-ESCOLHIDO\entrada* e imprime o resultado da análise (erros semânticos, se existirem) no arquivo *saida.txt* localizado no *CAMINHO-ESCOLHIDO*.
 
 ## Exemplos
 
