@@ -26,10 +26,12 @@ public class LinguagemNoita extends NoitaBaseVisitor<Void> {
     // e wands, respectivamente
     String[] tipoObrigtSpell = {"type", "mana"};
     String[] tipoObrigtWand = {"shuffle", "spells/cast", "delay", "recharge",
-                                 "mana", "regen", "capacity", "spread", "slots"};
+                                 "mana", "regen", "spread", "slots"};
     List<String> tipoFaltaSpell = new ArrayList<String>();
     List<String> tipoFaltaWand = new ArrayList<String>();
     int numSlots = 0;
+    // Lista temporária de slots ocupados em wand
+    List<String> slotsEmWand = new ArrayList<String>();
 
 
     @Override
@@ -42,7 +44,7 @@ public class LinguagemNoita extends NoitaBaseVisitor<Void> {
         if (ctx.s != null) {
             String strNomeSpell = ctx.s.getText();
             if (!tabela.existe(strNomeSpell)){
-                tabela.adicionar(strNomeSpell, TipoObjeto.SPELL);
+                tabela.adicionar(strNomeSpell, TipoObjeto.SPELL, null);
             } else{
                 // Reportar erro de spell já declarada 
             }
@@ -91,10 +93,12 @@ public class LinguagemNoita extends NoitaBaseVisitor<Void> {
 
     @Override
     public Void visitWand(WandContext ctx) {
+        boolean adicionaWand = false;
+        String strNomeWand;
         if (ctx.w != null) {
-            String strNomeWand = ctx.w.getText();
+            strNomeWand = ctx.w.getText();
             if (!tabela.existe(strNomeWand)){
-                tabela.adicionar(strNomeWand, TipoObjeto.WAND);
+                adicionaWand = true; // Wand será adicionada na tabela mais tarde
             } else{
                 // Reportar erro de wand já declarada 
             }
@@ -111,8 +115,22 @@ public class LinguagemNoita extends NoitaBaseVisitor<Void> {
             tipoFaltaWand.add(attr);
         }
 
+        // Capacidade padrão de slots em wand
+        numSlots = 10;
+
+        // Remove todas as spells de wand antes de verificar os slots de wand
+        for (var slot : slotsEmWand){
+            slotsEmWand.remove(slot);
+        }
+
         for (var wand : ctx.tipo_wand()) {
             visitTipo_wand(wand);
+        }
+
+        // Adiciona wand com a lista de slots à tabela
+        if (adicionaWand){
+            strNomeWand = ctx.w.getText();
+            tabela.adicionar(strNomeWand, TipoObjeto.WAND, slotsEmWand);
         }
 
         // Se wand possui atributos obrigatórios não declarados, reporta erro
@@ -138,6 +156,24 @@ public class LinguagemNoita extends NoitaBaseVisitor<Void> {
             if (atributoSpell == "capacity"){
                 // Limita o número de spells no atributo slots
                 numSlots = Integer.parseInt(ctx.numslots.getText());
+            }
+
+            if (atributoSpell == "slots"){
+                int numSlotsTemp = 0;
+                // Verifica o número de slots sendo ocupados
+                for (var slot : ctx.nslots){
+                    numSlotsTemp++;
+                    // Verifica se spell foi declarada
+                    if (tabela.existe(slot.getText())){
+                        if (numSlotsTemp > numSlots){
+                            // Reporta erro de número de slots insuficiente
+                        } else{
+                            slotsEmWand.add(slot.getText());
+                        }
+                    } else{  // Spell na lista de slots não existe
+                        // Reporta erro de spell não declarada
+                    }
+                }
             }
         }
         

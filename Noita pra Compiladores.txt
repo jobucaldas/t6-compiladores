@@ -4,27 +4,36 @@
 
 spells
 	spell spellName
-		type spellType[TipoSpell]
-		mana manaCost[int]
+		type: spellType[TipoSpell]
+		mana: manaCost[int]
 		"extras []"
 	end-spell
 end-spells
 ;comentario
 wands
 	wand wandName
-		shuffle isShuffle[bool]
-		spells/cast spellsPorCast[int]
-		delay wandDelay[float] s
-		recharge wandRechargeTime[float] s
-		mana maxMana[int]
-		regen manaRegen[int]
-		capacity maxCapacity[int]
-		spread wandSpread[float] DEG
-		slots
+		shuffle: isShuffle[bool]
+		spells/cast: spellsPorCast[int]
+		delay: wandDelay[float] s
+		recharge: wandRechargeTime[float] s
+		mana: maxMana[int]
+		regen: manaRegen[int]
+		capacity: maxCapacity[int]
+		spread: wandSpread[float] DEG
+		slots:
 			spell1[string], spell2[string], ... , spelln[string]
 		end-slots
 	end-wand
 end-wands
+
+gameplay
+	print(wandName)
+	addSpell(wandName,spellName)
+	removeSpell(wandName,spellName)
+	shootWand(wandName)
+	// numberOfTimes é o número de vezes que wandName será disparada
+	keepShootingWand(wandName, numberOfTimes)
+end-gameplay
 
 ############################################################################
 

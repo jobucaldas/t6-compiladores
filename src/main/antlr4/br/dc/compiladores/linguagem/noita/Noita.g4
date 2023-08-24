@@ -43,7 +43,7 @@ tipo_wand: 'shuffle:' tipo_bool
         | 'regen:' NUM_INT
         | 'capacity:' numslots=NUM_INT
         | 'spread:' NUM_REAL 'DEG'
-        | 'slots:' slot (',' slot)* 'end-slots';
+        | 'slots:' nslots+=slot (',' nslots+=slot)* 'end-slots';
 slot: CADEIA;
 tipo_bool: 'Yes' | 'No';
 corpo: 'gameplay' (comando)* 'end-gameplay';
