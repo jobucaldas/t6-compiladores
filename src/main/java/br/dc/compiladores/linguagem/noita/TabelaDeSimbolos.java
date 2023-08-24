@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TabelaDeSimbolos {
-    
+
     public enum TipoNoita {
         INTEIRO,
         REAL,
