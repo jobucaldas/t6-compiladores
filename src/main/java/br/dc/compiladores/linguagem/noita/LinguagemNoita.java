@@ -9,7 +9,6 @@ import br.dc.compiladores.linguagem.noita.NoitaParser.Tipo_obrigatorioContext;
 import br.dc.compiladores.linguagem.noita.NoitaParser.Tipo_wandContext;
 import br.dc.compiladores.linguagem.noita.NoitaParser.Tipos_spellContext;
 import br.dc.compiladores.linguagem.noita.NoitaParser.WandContext;
-import br.dc.compiladores.linguagem.noita.TabelaDeSimbolos.TipoObjeto;
 
 public class LinguagemNoita extends NoitaBaseVisitor<Void> {
     
@@ -44,7 +43,7 @@ public class LinguagemNoita extends NoitaBaseVisitor<Void> {
         if (ctx.s != null) {
             String strNomeSpell = ctx.s.getText();
             if (!tabela.existe(strNomeSpell)){
-                tabela.adicionar(strNomeSpell, TipoObjeto.SPELL, null);
+                tabela.adicionar(strNomeSpell, null);
             } else{
                 // Reportar erro de spell já declarada 
             }
@@ -81,8 +80,23 @@ public class LinguagemNoita extends NoitaBaseVisitor<Void> {
         if (posDoispontos != -1){
             String atributoSpell = ctx.getText().substring(0, posDoispontos);
 
+            // Se for um atributo obrigatório, remove o atributo da lista
+            // de atributos obrigatórios faltantes
             if (tipoFaltaSpell.contains(atributoSpell)){
                 tipoFaltaSpell.remove(atributoSpell);
+            }
+
+            if (atributoSpell == "type"){
+                String tipoSpell = ctx.getText().substring(posDoispontos);
+                // Verifica se o tipo da spell é um tipo válido
+                switch(tipoSpell){
+                    case "projectile":
+                    case "aura":
+                    case "object":
+                        break;
+                    default: 
+                        // Reporta erro de tipo inválido de spell
+                }
             }
         }
         
@@ -130,7 +144,7 @@ public class LinguagemNoita extends NoitaBaseVisitor<Void> {
         // Adiciona wand com a lista de slots à tabela
         if (adicionaWand){
             strNomeWand = ctx.w.getText();
-            tabela.adicionar(strNomeWand, TipoObjeto.WAND, slotsEmWand);
+            tabela.adicionar(strNomeWand, slotsEmWand);
         }
 
         // Se wand possui atributos obrigatórios não declarados, reporta erro

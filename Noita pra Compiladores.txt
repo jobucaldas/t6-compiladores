@@ -26,14 +26,6 @@ wands
 	end-wand
 end-wands
 
-gameplay
-	print(wandName)
-	addSpell(wandName,spellName)
-	removeSpell(wandName,spellName)
-	shootWand(wandName)
-	// numberOfTimes é o número de vezes que wandName será disparada
-	keepShootingWand(wandName, numberOfTimes)
-end-gameplay
 
 ############################################################################
 

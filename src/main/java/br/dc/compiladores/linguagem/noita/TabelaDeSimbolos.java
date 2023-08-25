@@ -14,20 +14,12 @@ public class TabelaDeSimbolos {
         INVALIDO
     }
 
-    public enum TipoObjeto {
-        SPELL,
-        WAND,
-        INVALIDO
-    }
-
     class EntradaTabelaDeSimbolos {
         String nome;
-        TipoObjeto tipo;
         List<String> spellsDaWand;
 
-        private EntradaTabelaDeSimbolos(String nome, TipoObjeto tipo, List<String> spellsDaWand) {
+        private EntradaTabelaDeSimbolos(String nome, List<String> spellsDaWand) {
             this.nome = nome;
-            this.tipo = tipo;
             this.spellsDaWand = spellsDaWand;
         }
     }
@@ -38,21 +30,12 @@ public class TabelaDeSimbolos {
         this.tabela = new HashMap<>();
     }
 
-    public void adicionar(String nome, TipoObjeto tipo, List<String> spellsDaWand) {
-        // Spells não devem ter lista de spells
-        if (tipo == TipoObjeto.SPELL){
-            tabela.put(nome, new EntradaTabelaDeSimbolos(nome, tipo, null));
-        } else{
-            tabela.put(nome, new EntradaTabelaDeSimbolos(nome, tipo, spellsDaWand));
-        }
+    public void adicionar(String nome, List<String> spellsDaWand) {
+        tabela.put(nome, new EntradaTabelaDeSimbolos(nome, spellsDaWand));
     }
 
     public boolean existe(String nome) {
         return tabela.containsKey(nome);
-    }
-
-    public TipoObjeto verificar(String nome) {
-        return tabela.get(nome).tipo;
     }
 
     public List<String> verificarSpellsEmWand(String nome){

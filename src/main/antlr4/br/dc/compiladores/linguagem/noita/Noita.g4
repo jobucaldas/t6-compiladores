@@ -17,7 +17,7 @@ COMENTARIO
 WS 	:	( ' ' |'\t' | '\r' | '\n') {skip();}
 	;
 
-programa: definicaoSpells definicaoWands corpo;
+programa: definicaoSpells definicaoWands;
 definicaoSpells: 'spells' (spell)* 'end-spells';
 spell: 'spell' s=CADEIA (tipos_spell)* 'end-spell';
 tipos_spell: tipo_obrigatorio
@@ -46,11 +46,3 @@ tipo_wand: 'shuffle:' tipo_bool
         | 'slots:' nslots+=slot (',' nslots+=slot)* 'end-slots';
 slot: CADEIA;
 tipo_bool: 'Yes' | 'No';
-corpo: 'gameplay' (comando)* 'end-gameplay';
-comando: comandoPrint | comandoAddSpell | comandoRemoveSpell 
-        | comandoShootWand | comandoKeepShootingWand;
-comandoPrint: 'print' '(' CADEIA ')';
-comandoAddSpell: 'addSpell' '(' CADEIA ',' CADEIA ')';
-comandoRemoveSpell: 'removeSpell' '(' CADEIA ',' CADEIA ')';
-comandoShootWand: 'shootWand' '(' CADEIA ')';
-comandoKeepShootingWand: 'keepShootingWand' '(' CADEIA ',' NUM_INT ')';

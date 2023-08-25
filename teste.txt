@@ -1,0 +1,27 @@
+spells
+	spell fireball
+		type: projectile
+		mana: 100
+	end-spell
+    spell healing
+        type: aura
+        mana: 50
+    end-spell
+end-spells
+;comentario
+wands
+	wand varinhaDaora
+		shuffle: No
+		spells/cast: 1
+		delay: 0.5 s
+		recharge: 1.0 s
+		mana: 500
+		regen: 30
+		capacity: 5
+		spread: 30 DEG
+		slots:
+			fireball, fireball, healing
+		end-slots
+	end-wand
+end-wands
+
