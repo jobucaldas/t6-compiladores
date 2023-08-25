@@ -9,6 +9,7 @@ import br.dc.compiladores.linguagem.noita.NoitaParser.Tipo_obrigatorioContext;
 import br.dc.compiladores.linguagem.noita.NoitaParser.Tipo_wandContext;
 import br.dc.compiladores.linguagem.noita.NoitaParser.Tipos_spellContext;
 import br.dc.compiladores.linguagem.noita.NoitaParser.WandContext;
+import br.dc.compiladores.linguagem.noita.LinguagemNoitaUtils;
 
 public class LinguagemNoita extends NoitaBaseVisitor<Void> {
     
@@ -45,7 +46,9 @@ public class LinguagemNoita extends NoitaBaseVisitor<Void> {
             if (!tabela.existe(strNomeSpell)){
                 tabela.adicionar(strNomeSpell, null);
             } else{
-                // Reportar erro de spell já declarada 
+                // Reportar erro de spell já declarada
+                String erroSemantico = "spell "+strNomeSpell+" já declarada!";
+                LinguagemNoitaUtils.addErroSemantico(ctx.s, erroSemantico); 
             }
         }
 
@@ -68,6 +71,8 @@ public class LinguagemNoita extends NoitaBaseVisitor<Void> {
         // para cada atributo obrigatório ausente
         for (var attr : tipoFaltaSpell){
             // Reporta erro de atributo obrigatório não declarado
+            String erroSemantico = "atributo obrigatório "+attr+" não declarado em spell "+ctx.s.getText()+"!";
+            LinguagemNoitaUtils.addErroSemantico(ctx.s, erroSemantico);
         }
         
         return null;
@@ -87,7 +92,10 @@ public class LinguagemNoita extends NoitaBaseVisitor<Void> {
             }
 
             if (atributoSpell == "type"){
-                String tipoSpell = ctx.getText().substring(posDoispontos);
+                String tipoSpell = "";
+                if (ctx.to1 != null){
+                    tipoSpell = ctx.to1.getText();
+                }
                 // Verifica se o tipo da spell é um tipo válido
                 switch(tipoSpell){
                     case "projectile":
@@ -96,6 +104,8 @@ public class LinguagemNoita extends NoitaBaseVisitor<Void> {
                         break;
                     default: 
                         // Reporta erro de tipo inválido de spell
+                        String erroSemantico = "tipo "+tipoSpell+" inválido!";
+                        LinguagemNoitaUtils.addErroSemantico(ctx.to1, erroSemantico);
                 }
             }
         }
@@ -108,13 +118,14 @@ public class LinguagemNoita extends NoitaBaseVisitor<Void> {
     @Override
     public Void visitWand(WandContext ctx) {
         boolean adicionaWand = false;
-        String strNomeWand;
+        String strNomeWand = "";
         if (ctx.w != null) {
             strNomeWand = ctx.w.getText();
             if (!tabela.existe(strNomeWand)){
                 adicionaWand = true; // Wand será adicionada na tabela mais tarde
             } else{
-                // Reportar erro de wand já declarada 
+                // Reportar erro de wand já declarada
+                String erroSemantico = "wand "+strNomeWand+" já declarada!";
             }
         }
 
@@ -151,6 +162,8 @@ public class LinguagemNoita extends NoitaBaseVisitor<Void> {
         // para cada atributo obrigatório ausente
         for (var attr : tipoFaltaWand){
             // Reporta erro de atributo obrigatório não declarado
+            String erroSemantico = "atributo obrigatório "+attr+" não declarado em wand "+strNomeWand+"!";
+            LinguagemNoitaUtils.addErroSemantico(ctx.w, erroSemantico);
         }
 
         return null;
@@ -181,11 +194,16 @@ public class LinguagemNoita extends NoitaBaseVisitor<Void> {
                     if (tabela.existe(slot.getText())){
                         if (numSlotsTemp > numSlots){
                             // Reporta erro de número de slots insuficiente
+                            WandContext wandCtx = (WandContext)ctx.getParent();
+                            String erroSemantico = "número insuliciente de slots em wand "+wandCtx.w.getText()+" ao adicionar spell "+slot.getText()+"!";
+                            LinguagemNoitaUtils.addErroSemantico(ctx.slot(numSlotsTemp).getStart(), erroSemantico);
                         } else{
                             slotsEmWand.add(slot.getText());
                         }
                     } else{  // Spell na lista de slots não existe
                         // Reporta erro de spell não declarada
+                        String erroSemantico = "spell "+slot.getText()+" não declarada!";
+                        LinguagemNoitaUtils.addErroSemantico(ctx.slot(numSlotsTemp).getStart(), erroSemantico);
                     }
                 }
             }
