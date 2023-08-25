@@ -67,6 +67,17 @@ public class LinguagemNoita extends NoitaBaseVisitor<Void> {
             visitTipos_spell(spell);
         }
         
+        /*
+        List<Tipo_obrigatorioContext> attrCtx = new ArrayList<Tipo_obrigatorioContext>();
+        for (var attrSpell : ctx.tipos_spell()){
+            if (attrSpell.tipo_obrigatorio() != null){
+                if (attrSpell.tipo_obrigatorio().to1 == null){
+                    attrCtx.add()
+                }
+            }
+        }
+        */
+
         // Se spell possui atributos obrigatórios não declarados, reporta erro
         // para cada atributo obrigatório ausente
         for (var attr : tipoFaltaSpell){
@@ -91,7 +102,7 @@ public class LinguagemNoita extends NoitaBaseVisitor<Void> {
                 tipoFaltaSpell.remove(atributoSpell);
             }
 
-            if (atributoSpell == "type"){
+            if (atributoSpell.equals("type")){
                 String tipoSpell = "";
                 if (ctx.to1 != null){
                     tipoSpell = ctx.to1.getText();
@@ -126,6 +137,7 @@ public class LinguagemNoita extends NoitaBaseVisitor<Void> {
             } else{
                 // Reportar erro de wand já declarada
                 String erroSemantico = "wand "+strNomeWand+" já declarada!";
+                LinguagemNoitaUtils.addErroSemantico(ctx.w, erroSemantico);
             }
         }
 
@@ -180,12 +192,17 @@ public class LinguagemNoita extends NoitaBaseVisitor<Void> {
                 tipoFaltaWand.remove(atributoSpell);
             }
 
-            if (atributoSpell == "capacity"){
+            if (atributoSpell.equals("capacity")){
                 // Limita o número de spells no atributo slots
-                numSlots = Integer.parseInt(ctx.numslots.getText());
+                // Se o valor for negativo, passa valor 0
+                if (Integer.parseInt(ctx.numslots.getText()) < 0){
+                    numSlots = 0;
+                } else{
+                    numSlots = Integer.parseInt(ctx.numslots.getText());
+                }
             }
 
-            if (atributoSpell == "slots"){
+            if (atributoSpell.equals("slots")){
                 int numSlotsTemp = 0;
                 // Verifica o número de slots sendo ocupados
                 for (var slot : ctx.nslots){
@@ -196,14 +213,14 @@ public class LinguagemNoita extends NoitaBaseVisitor<Void> {
                             // Reporta erro de número de slots insuficiente
                             WandContext wandCtx = (WandContext)ctx.getParent();
                             String erroSemantico = "número insuliciente de slots em wand "+wandCtx.w.getText()+" ao adicionar spell "+slot.getText()+"!";
-                            LinguagemNoitaUtils.addErroSemantico(ctx.slot(numSlotsTemp).getStart(), erroSemantico);
+                            LinguagemNoitaUtils.addErroSemantico(ctx.slot(numSlotsTemp-1).getStart(), erroSemantico);
                         } else{
                             slotsEmWand.add(slot.getText());
                         }
                     } else{  // Spell na lista de slots não existe
                         // Reporta erro de spell não declarada
                         String erroSemantico = "spell "+slot.getText()+" não declarada!";
-                        LinguagemNoitaUtils.addErroSemantico(ctx.slot(numSlotsTemp).getStart(), erroSemantico);
+                        LinguagemNoitaUtils.addErroSemantico(ctx.slot(numSlotsTemp-1).getStart(), erroSemantico);
                     }
                 }
             }

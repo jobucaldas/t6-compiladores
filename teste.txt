@@ -2,13 +2,28 @@ spells
 	spell fireball
 		type: projectile
 		mana: 100
+        uses: 8
+        damage: 50
+        radius: 30
+        spread: 10 DEG
+        speed: 100
+        delay: 1.34 s
+        recharge: 1 s
+        crit: 15%
 	end-spell
     spell healing
         type: aura
         mana: 50
+        uses: 2
+        lifetime: 4 s
+        damage: -20
+    end-spell
+    spell jander
+        type: object
+        mana: 9001
     end-spell
 end-spells
-;comentario
+###comentario
 wands
 	wand varinhaDaora
 		shuffle: No
@@ -20,7 +35,7 @@ wands
 		capacity: 5
 		spread: 30 DEG
 		slots:
-			fireball, fireball, healing
+			fireball, fireball, jander,                healing
 		end-slots
 	end-wand
 end-wands
