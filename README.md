@@ -38,7 +38,7 @@ Todo programa deve ter spells e wands definidos, entre *spells* | *end-spells* e
 
 ### Comentários
 
-Definidos ao se iniciar uma linha com ;
+Definidos como texto após a sequencia '###'.
 
 ### Spells
 
@@ -103,17 +103,17 @@ slots: [spells] end-slots
 ### Input 1
 
 ```noita
-;spells
+### Declaração de Spells
 spells
   spell fireball
     type: projectile
     mana: 10
-    damage: 500 ;optional
-    speed: 12   ;optional
+    damage: 500 ### opcional
+    speed: 12   ### opcional
   end-spell
 end-spells
 
-;wands
+### Declaração de Wands
 wands
   wand mageStaff
     shuffle: FALSE
@@ -146,7 +146,6 @@ mageStaff:
       Mana: 10
       Damage: 500
       Speed: 12
-
 ```
 
 ## Problemas de compilação
@@ -154,17 +153,17 @@ mageStaff:
 ### Input Erro
 
 ```noita
-;spells
+### Declaração de Spells
 spells
   spell hadouken
     type: projectile
     mana: 500
-    damage: 250 ;optional
-    speed: 6    ;optional
+    damage: 250 ### opcional
+    speed: 6    ### opcional
   end-spell
 end-spells
 
-;wands
+### Declaração de Wands
 wands
   wand mageStaff
     shuffle: FALSE
@@ -187,5 +186,4 @@ end-wands
 
 ```noita
 Erro na linha 24: Spell 'fireball' não declarado
-
 ```
