@@ -1,0 +1,27 @@
+### Declaração de Spells
+spells
+  spell hadouken
+    type: projectile
+    mana: 500
+    damage: 250 ### opcional
+    speed: 6    ### opcional
+  end-spell
+end-spells
+
+### Declaração de Wands
+wands
+  wand mageStaff
+    shuffle: No
+    spells/cast: 2
+    delay: 0.3 s
+    recharge: 1.2 s
+    mana: 830
+    regen: 10
+    capacity: 3
+    spread: 3.0 DEG
+    
+    slots:
+      fireball
+    end-slots
+  end-wand
+end-wands
