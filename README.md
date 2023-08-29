@@ -38,17 +38,17 @@ Todo programa deve ter spells e wands definidos, entre *spells* | *end-spells* e
 
 ### Comentários
 
-Definidos ao se iniciar uma linha com ;
+Definidos como texto após a sequencia '###'.
 
 ### Spells
 
-Spells são definidas entre *spell* e *end_spell* com seus atributos definidos internamente entre estes.
+Spells são definidas entre *spell* **NOME-SPELL** e *end-spell* com seus atributos definidos internamente entre estes.
 
 Os atributos obrigatórios para spell são:
 
 ```noita
 type: [tipo]
-mana: [inteiro]
+mana: [num]
 ```
 
 Os tipos para o atributo *type* são:
@@ -60,39 +60,60 @@ Os tipos para o atributo *type* são:
 Os atributos opcionais são:
 
 ```noita
-uses: [int]
+uses: [num]
 
-damage: [int]
+damage: [num]
 
-radius: [int]
+radius: [num]
 
-spread: [float] DEG
+spread: [num] DEG
 
-speed: [int]
+speed: [num]
 
-lifetime: [float] s
+lifetime: [num] s
 
-delay: [float] s
+delay: [num] s
 
-recharge: [float] s
+recharge: [num] s
 
-crit: % [int]
+crit: % [num]
+```
+
+### Wands
+
+Wands são definidas entre *wand* **NOME-WAND** e *end-wand* com seus atributos definidos internamente entre estes.
+
+Os atributos obrigatórios para wand são:
+
+```noita
+shuffle: [boolean]
+spells/cast: [num]
+delay: [num] s
+recharge: [num] s
+mana: [num]
+regen: [num]
+capacity: [num]
+spread: [num] DEG
+
+slots: [spells] end-slots
 ```
 
 ## Exemplo de código nessa linguagem
 
+### Input 1
+
 ```noita
-;spells
+### Declaração de Spells
 spells
   spell fireball
     type: projectile
     mana: 10
-    damage: 500 ;optional
-    speed: 12   ;optional
+    damage: 500 ### opcional
+    speed: 12   ### opcional
   end-spell
 end-spells
 
-;wands
+### Declaração de Wands
 wands
   wand mageStaff
     shuffle: No
@@ -109,4 +130,60 @@ wands
     end-slots
   end-wand
 end-wands
+```
+
+### Output esperado
+
+```noita
+mageStaff:
+  Damage Per Second: 1666.66
+  Free Mana: 820
+  Free Slots: 2
+
+  Equipped Spells:
+    fireball:
+      Type: projectile
+      Mana: 10
+      Damage: 500
+      Speed: 12
+```
+
+## Problemas de compilação
+
+### Input Erro
+
+```noita
+### Declaração de Spells
+spells
+  spell hadouken
+    type: projectile
+    mana: 500
+    damage: 250 ### opcional
+    speed: 6    ### opcional
+  end-spell
+end-spells
+
+### Declaração de Wands
+wands
+  wand mageStaff
+    shuffle: FALSE
+    spells/cast: 2
+    delay: 0.3 s
+    recharge: 1.2 s
+    mana: 830
+    regen: 10
+    capacity: 3
+    spread: 3.0 DEG
+    
+    slots:
+      fireball
+    end-slots
+  end-wand
+end-wands
+```
+
+### Output com Erro
+
+```noita
+Erro na linha 24: Spell 'fireball' não declarado
 ```
