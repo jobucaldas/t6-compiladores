@@ -166,7 +166,7 @@ end-spells
 ### Declaração de Wands
 wands
   wand mageStaff
-    shuffle: FALSE
+    shuffle: No
     spells/cast: 2
     delay: 0.3 s
     recharge: 1.2 s
