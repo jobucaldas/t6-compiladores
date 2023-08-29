@@ -19,7 +19,7 @@ spells
         damage: -20
     end-spell
     spell jander
-        type: object
+        ###type: object
         mana: 9001
     end-spell
 end-spells
