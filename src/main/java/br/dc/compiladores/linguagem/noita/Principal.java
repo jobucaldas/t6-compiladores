@@ -16,7 +16,12 @@ public class Principal {
         ProgramaContext arvore = parser.programa();
         LinguagemNoita ln = new LinguagemNoita();
         ln.visitPrograma(arvore);
-        LinguagemNoitaUtils.errosSemanticos.forEach((s) -> System.out.println(s));
-        System.out.println("Fim da compilação!");
+        if (LinguagemNoitaUtils.errosSemanticos.isEmpty()){
+            InterpretadorNoita in = new InterpretadorNoita();
+            in.visitPrograma(arvore);
+        } else{ // Compilador encontrou erros
+            LinguagemNoitaUtils.errosSemanticos.forEach((s) -> System.out.println(s));
+            System.out.println("Fim da compilação!");
+        }
     }
 }

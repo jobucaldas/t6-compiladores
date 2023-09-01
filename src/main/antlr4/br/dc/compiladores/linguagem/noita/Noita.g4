@@ -18,27 +18,27 @@ definicaoSpells: 'spells' (spell)* 'end-spells';
 spell: 'spell' s=CADEIA (tipos_spell)* 'end-spell';
 tipos_spell: tipo_obrigatorio
         | tipo_extra;
-tipo_obrigatorio: 'type:' to1=CADEIA
-        | 'mana:' to2=NUM;
-tipo_extra: 'uses:' NUM
-        | 'damage:' NUM
-        | 'radius:' NUM
-        | 'spread:' NUM 'DEG'
-        | 'speed:' NUM
-        | 'lifetime:' NUM 's'
-        | 'delay:' NUM 's'
-        | 'recharge:' NUM 's'
-        | 'crit:' NUM '%';
+tipo_obrigatorio: 'type:' stype=CADEIA
+        | 'mana:' smana=NUM;
+tipo_extra: 'uses:' suses=NUM
+        | 'damage:' sdamage=NUM
+        | 'radius:' sradius=NUM
+        | 'spread:' sspread=NUM 'DEG'
+        | 'speed:' sspeed=NUM
+        | 'lifetime:' slifetime=NUM 's'
+        | 'delay:' sdelay=NUM 's'
+        | 'recharge:' srecharge=NUM 's'
+        | 'crit:' scrit=NUM '%';
 definicaoWands: 'wands' (wand)* 'end-wands';
 wand: 'wand' w=CADEIA (tipo_wand)* 'end-wand';
-tipo_wand: 'shuffle:' tipo_bool
-        | 'spells/cast:' NUM
-        | 'delay:' NUM 's'
-        | 'recharge:' NUM 's'
-        | 'mana:' NUM
-        | 'regen:' NUM
+tipo_wand: 'shuffle:' wshuffle=tipo_bool
+        | 'spells/cast:' wcast=NUM
+        | 'delay:' wdelay=NUM 's'
+        | 'recharge:' wrecharge=NUM 's'
+        | 'mana:' wmana=NUM
+        | 'regen:' wregen=NUM
         | 'capacity:' numslots=NUM
-        | 'spread:' NUM 'DEG'
+        | 'spread:' wspread=NUM 'DEG'
         | 'slots:' nslots+=slot (',' nslots+=slot)* 'end-slots';
 slot: CADEIA;
 tipo_bool: 'Yes' | 'No';

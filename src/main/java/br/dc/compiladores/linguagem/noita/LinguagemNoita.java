@@ -104,8 +104,8 @@ public class LinguagemNoita extends NoitaBaseVisitor<Void> {
 
             if (atributoSpell.equals("type")){
                 String tipoSpell = "";
-                if (ctx.to1 != null){
-                    tipoSpell = ctx.to1.getText();
+                if (ctx.stype != null){
+                    tipoSpell = ctx.stype.getText();
                 }
                 // Verifica se o tipo da spell é um tipo válido
                 switch(tipoSpell){
@@ -116,7 +116,7 @@ public class LinguagemNoita extends NoitaBaseVisitor<Void> {
                     default: 
                         // Reporta erro de tipo inválido de spell
                         String erroSemantico = "tipo "+tipoSpell+" inválido!";
-                        LinguagemNoitaUtils.addErroSemantico(ctx.to1, erroSemantico);
+                        LinguagemNoitaUtils.addErroSemantico(ctx.stype, erroSemantico);
                 }
             }
         }

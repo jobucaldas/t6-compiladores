@@ -44,4 +44,34 @@ public class TabelaDeSpells {
         tabela.put(nome, new EntradaTabelaDeSpells(nome,type,mana,uses,damage,radius,spread,speed,
                                             lifetime, delay, recharge, crit));
     }
+
+    public Object getAttr(String nome, String key){
+        switch(key){
+            case "type":
+                return tabela.get(nome).type;
+            case "mana":
+                return tabela.get(nome).mana;
+            case "uses":
+                return tabela.get(nome).uses;
+            case "damage":
+                return tabela.get(nome).damage;
+            case "radius":
+                return tabela.get(nome).radius;
+            case "spread":
+                return tabela.get(nome).spread;
+            case "speed":
+                return tabela.get(nome).speed;
+            case "lifetime":
+                return tabela.get(nome).lifetime;
+            case "delay":
+                return tabela.get(nome).delay;
+            case "recharge":
+                return tabela.get(nome).recharge;
+            case "crit":
+                return tabela.get(nome).crit;
+            default:
+                // Nunca vai chegar aqui!
+                return null;
+        }
+    }
 }
