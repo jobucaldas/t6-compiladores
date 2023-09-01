@@ -135,6 +135,7 @@ end-wands
 ### Output esperado
 
 ```noita
+mageStaff:
         Damage per second: 500.0
         Free mana: 820
         Free slots: 2
@@ -142,11 +143,9 @@ end-wands
         Equipped spells:
                 fireball:
                         Type: projectile
-                        Mana: 10
                         Uses: 999
                         Damage: 500
                         Radius: 1.0
-                        Spread: 0.0 DEG
                         Speed: 12.0
                         Lifetime: 1.0 s
                         Delay: 1.0 s
