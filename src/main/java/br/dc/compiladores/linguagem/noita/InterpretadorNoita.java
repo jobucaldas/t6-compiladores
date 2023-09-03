@@ -50,8 +50,8 @@ public class InterpretadorNoita extends NoitaBaseVisitor<Void> {
         // - spread: 0.0f
         // - speed: 0.0f
         // - lifetime: 1.0f
-        // - delay: 1.0f
-        // - recharge: 1.0f
+        // - delay: 0.0f
+        // - recharge: 0.0f
         // - crit: 0.0f
 
         String tempNome=(String)listAttrSpell.get("nome"),
@@ -63,8 +63,8 @@ public class InterpretadorNoita extends NoitaBaseVisitor<Void> {
              tempSpread=(listAttrSpell.containsKey("spread") ? Float.parseFloat(listAttrSpell.get("spread")) : 0.0f),
              tempSpeed=(listAttrSpell.containsKey("speed") ? Float.parseFloat(listAttrSpell.get("speed")) : 0.0f), 
              tempLifetime=(listAttrSpell.containsKey("lifetime") ? Float.parseFloat(listAttrSpell.get("lifetime")) : 1.0f), 
-             tempDelay=(listAttrSpell.containsKey("delay") ? Float.parseFloat(listAttrSpell.get("delay")) : 1.0f), 
-             tempRecharge=(listAttrSpell.containsKey("recharge") ? Float.parseFloat(listAttrSpell.get("recharge")) : 1.0f), 
+             tempDelay=(listAttrSpell.containsKey("delay") ? Float.parseFloat(listAttrSpell.get("delay")) : 0.0f), 
+             tempRecharge=(listAttrSpell.containsKey("recharge") ? Float.parseFloat(listAttrSpell.get("recharge")) : 0.0f), 
              tempCrit=(listAttrSpell.containsKey("crit") ? Float.parseFloat(listAttrSpell.get("crit")) : 0.0f);
         
         tabelaSpells.adicionar(tempNome, tempType, tempMana, tempUses, tempDamage, 
@@ -163,8 +163,8 @@ public class InterpretadorNoita extends NoitaBaseVisitor<Void> {
             numSpells++;
             manaRest -= (Integer)tabelaSpells.getAttr(spell, "mana");
             tempDps += (Integer)tabelaSpells.getAttr(spell, "damage")
-                         * (Float)tabelaSpells.getAttr(spell, "delay")
-                         * (Float)tabelaSpells.getAttr(spell, "lifetime");
+                         * (Float)tabelaSpells.getAttr(spell, "lifetime")
+                         / ((Float)tabelaSpells.getAttr(spell, "delay")+(Float)tabelaWands.getAttr(tempNome, "delay"));
         } 
         
         int slotsRest = tempCapacity - numSpells;
