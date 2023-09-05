@@ -6,6 +6,8 @@ Marcus Vinicius Soares de Oliveira - 770026
 
 Compilador de linguagem para se construir builds para o jogo [Noita](https://noitagame.com/).
 
+O vídeo de apresentação da linguagem se encontra [aqui](https://drive.google.com/file/d/104JGyn-0Hfhs5hDq8ll0k0yX6SkTRoA2/view?usp=drive_link)
+
 ## Compilando o compilador
 
 A extensão "Maven for Java" e o pacote "Extension Pack for Java" foram utilizadas na execução do compilador, utilizando Java 16.
