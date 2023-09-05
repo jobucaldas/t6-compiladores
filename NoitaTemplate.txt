@@ -9,7 +9,7 @@ spells
 		"extras []"
 	end-spell
 end-spells
-;comentario
+###comentario
 wands
 	wand wandName
 		shuffle: isShuffle[bool]
@@ -18,7 +18,7 @@ wands
 		recharge: wandRechargeTime[float] s
 		mana: maxMana[int]
 		regen: manaRegen[int]
-		capacity: maxCapacity[int]
+		capacity: maxCapacity[int] ### optional
 		spread: wandSpread[float] DEG
 		slots:
 			spell1[string], spell2[string], ... , spelln[string]

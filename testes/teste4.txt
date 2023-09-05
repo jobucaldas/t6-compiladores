@@ -1,0 +1,31 @@
+spells
+	spell fireball
+		type: projectile
+		mana: 100
+		damage: 300
+        radius: 20
+	end-spell
+    spell fireball
+        type: boladefogo
+        mana: 10
+        damage: 8
+        delay: -0.5 s
+        recharge: -1.0 s
+    end-spell
+end-spells
+
+wands
+	wand wandinha
+		shuffle: No
+		spells/cast: 1
+		delay: 0.6 s
+		recharge: 2.0 s
+		mana: 1000
+		regen: 1
+        capacity: 3
+		spread: 0.0 DEG
+		slots:
+			fireball, fireball, fireball, fireball
+		end-slots
+	end-wand
+end-wands

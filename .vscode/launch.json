@@ -16,7 +16,7 @@
             "request": "launch",
             "mainClass": "br.dc.compiladores.linguagem.noita.Principal",
             "projectName": "linguagem-noita",
-            "args": "C:\\Compiladores\\T6\\t6-compiladores\\teste.txt"
+            "args": "C:\\Compiladores\\T6\\t6-compiladores\\testes\\teste3.txt"
         }
     ]
 }

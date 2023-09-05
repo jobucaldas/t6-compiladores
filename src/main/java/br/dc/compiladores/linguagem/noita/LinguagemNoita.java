@@ -143,8 +143,10 @@ public class LinguagemNoita extends NoitaBaseVisitor<Void> {
 
         // Loop para esvaziar lista de atributos obrigatórios
         // antes de ser reinicializada
-        for (var attr : tipoFaltaWand){
-            tipoFaltaWand.remove(attr);
+        if (!tipoFaltaWand.isEmpty()){
+            for (var attr : tipoFaltaWand){
+                tipoFaltaWand.remove(attr);
+            }
         }
 
         // Inicializa lista com atributos obrigatórios
@@ -156,9 +158,12 @@ public class LinguagemNoita extends NoitaBaseVisitor<Void> {
         numSlots = 10;
 
         // Remove todas as spells de wand antes de verificar os slots de wand
+        slotsEmWand.removeAll(slotsEmWand);
+        /*
         for (var slot : slotsEmWand){
             slotsEmWand.remove(slot);
         }
+        */
 
         for (var wand : ctx.tipo_wand()) {
             visitTipo_wand(wand);

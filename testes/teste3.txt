@@ -38,5 +38,18 @@ wands
 			fireball, fireball, jander,                healing
 		end-slots
 	end-wand
+    wand varinhaDaora
+        shuffle: Yes
+		spells/cast: 1
+		delay: 0.5 s
+		recharge: 1.0 s
+		mana: 50
+		regen: 300
+		capacity: 5
+		spread: 30 DEG
+		slots:
+			fireball, boladefogo, jander,                healing
+		end-slots
+    end-wand
 end-wands
 

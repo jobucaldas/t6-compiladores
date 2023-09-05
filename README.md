@@ -19,18 +19,18 @@ mvn package
 Para a execução do programa:
 
 ```bash
-java -jar PATH-TO-REPO\target\linguagem-noita-1.0-SNAPSHOT-jar-with-dependencies.jar [ENTRADA] [SAIDA]
+java -jar PATH-TO-REPO\target\linguagem-noita-1.0-SNAPSHOT-jar-with-dependencies.jar [ENTRADA]
 ```
 
-Sendo a **[ENTRADA]** o endereço do programa a ser analisado e **[SAIDA]** o endereço do arquivo ao qual será impressa a saída.
+Sendo a **[ENTRADA]** o endereço do programa a ser analisado. A saída é impressa no terminal.
 
 Por exemplo, com o comando
 
 ```bash
-java -jar PATH-TO-REPO\alguma-semantico\target\linguagem-noita-1.0-SNAPSHOT-jar-with-dependencies.jar CAMINHO-ESCOLHIDO\entrada\programa.txt CAMINHO-ESCOLHIDO\saida.txt
+java -jar PATH-TO-REPO\alguma-semantico\target\linguagem-noita-1.0-SNAPSHOT-jar-with-dependencies.jar CAMINHO-ESCOLHIDO\entrada\programa.txt
 ```
 
-O compilador analisa a semântica do programa escrito no arquivo *programa.txt* localizado no *CAMINHO-ESCOLHIDO\entrada* e imprime o resultado da análise (erros semânticos, se existirem) no arquivo *saida.txt* localizado no *CAMINHO-ESCOLHIDO*.
+O compilador analisa a semântica do programa escrito no arquivo *programa.txt* localizado no *CAMINHO-ESCOLHIDO\entrada* e imprime o resultado da análise (erros semânticos, se existirem) no terminal.
 
 ## Gramatica
 
